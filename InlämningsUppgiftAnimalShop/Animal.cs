@@ -24,7 +24,7 @@ namespace InlämningsUppgiftAnimalShop
         private int prize;
         private string animalType;
 
-        //So I made these public properties to be able to access them. Encapsulation.
+        //I made these public properties to be able to access them. Encapsulation.
         public string Age 
         { 
             get 

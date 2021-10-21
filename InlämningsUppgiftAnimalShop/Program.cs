@@ -40,26 +40,42 @@ namespace InlämningsUppgiftAnimalShop
         static void Shop(ref AnimalShop myShop)
         {
             Console.WriteLine($"{AnimalsForSale()}");
-            SalesManSpeech("Vilket djur vill du köpa?");
+            SalesManSpeech("Vilken typ av djur vill du köpa?");
             string userInput = Console.ReadLine();
             Animal displayAnimal = myShop.SellAnimal(userInput);
             while (displayAnimal == null)
             {
+                UpdateScreen();
                 SalesManSpeech($"Vi har tyvärr ingen {userInput}.");
                 Console.WriteLine(AnimalsForSale());
-                displayAnimal = myShop.SellAnimal(Console.ReadLine());
+                SalesManSpeech("Vilken typ av djur vill du köpa?");
+                userInput = Console.ReadLine();
+                displayAnimal = myShop.SellAnimal(userInput);
             }
             bool loopBreaker = false;
             do
             {
+                string _userInput;
                 UpdateScreen();
+                Console.WriteLine($"*hämtar {displayAnimal.AnimalType}*\n");
                 SalesManSpeech($"Vi har följande {displayAnimal.AnimalType} till salu:");
                 Console.WriteLine($"{displayAnimal.GetInfo()}");
-                SalesManSpeech($"Vill du köpa {displayAnimal.Name} för {displayAnimal.Prize}");
-                if (YesOrNo(Console.ReadLine()))
+                SalesManSpeech($"Vill du köpa {displayAnimal.Name} för {displayAnimal.Prize} kronor?");
+                _userInput = Console.ReadLine();
+                if (_userInput == "pruta")
+                {
+                    Random randomizer = new Random();
+                    decimal discount = randomizer.Next(7, 10);
+                    discount /= 10;
+                    displayAnimal.Prize = Convert.ToInt32(displayAnimal.Prize * discount);
+                    Console.WriteLine("\n*föreståndaren kommer närmare och viskar*");
+                    SalesManSpeech($"Okej, vad sägs om att köpa {displayAnimal.Name} för {displayAnimal.Prize} kronor?");
+                    _userInput = Console.ReadLine();
+                }
+                if (YesOrNo(_userInput))
                 {
                     myShop.AddSoldAnimal(displayAnimal);
-                    SalesManSpeech($"\nTack så mycket!");
+                    SalesManSpeech($"\nTack för en bra affär!");
                     break;
                 }
                 else
@@ -72,6 +88,7 @@ namespace InlämningsUppgiftAnimalShop
                     }
                     else
                     {
+                        Console.WriteLine();
                         loopBreaker = true;
                     }
                 }
@@ -89,7 +106,7 @@ namespace InlämningsUppgiftAnimalShop
         /// <returns></returns>
         static bool YesOrNo(string userInput)
         {
-            string[] noWords = { "nej", "nopp", "ne", "inte", "icke", "njet", "no", "nix", "nja" };
+            string[] noWords = { "nej", "nopp", "ne", "inte", "icke", "njet", "no", "nix", "nja", "nej tack", "nej tack!" , "nej!" };
             userInput = userInput.Trim().ToLower();
             if (userInput == "n") return false;
             foreach (string item in noWords)
@@ -107,7 +124,7 @@ namespace InlämningsUppgiftAnimalShop
             foreach (char item in input)
             {
                 Console.Write(item);
-                Thread.Sleep(20);
+                Thread.Sleep(50);
             }
             Console.WriteLine("\n");
         }

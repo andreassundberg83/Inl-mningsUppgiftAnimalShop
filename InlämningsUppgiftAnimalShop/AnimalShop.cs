@@ -56,10 +56,11 @@ namespace InlämningsUppgiftAnimalShop
         /// <returns></returns>
         public string Summary()
         {
-            string soldAnimalsString = "Sålda djur:\n\n";
+            string soldAnimalsString = "Sålda djur:\n\n--------------------------------------------\n\n";
             foreach (Animal item in soldAnimals)
             {
-                soldAnimalsString += item.GetInfo() +"\n";
+                soldAnimalsString += item.GetInfo() + "\n--------------------------------------------\n\n";
+                ;
             }
             soldAnimalsString += $"\nAffärens intjänade pengar: {Money}";
             return soldAnimalsString;
