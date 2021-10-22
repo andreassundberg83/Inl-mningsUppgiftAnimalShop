@@ -23,7 +23,7 @@ namespace InlämningsUppgiftAnimalShop
                 } while (YesOrNo(Console.ReadLine()));
                 UpdateScreen();
                 SalesManSpeech("Tack och välkommen åter!");
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 UpdateScreen();                
                 Console.WriteLine(myShop.Summary());
             }
