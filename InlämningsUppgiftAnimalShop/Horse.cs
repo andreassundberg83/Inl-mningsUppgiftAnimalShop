@@ -13,36 +13,26 @@ namespace InlämningsUppgiftAnimalShop
         private bool afraidOfGunfire;
         private byte speed;
         private bool wildWestSuitable;
-        public string Rideable { get { if (rideable) return "Är inriden"; else return "Behöver ridas in"; } }
-        public string WildWestSuitable { get { if (wildWestSuitable) return "en perfekt vilda västern-häst!"; else return "olämplig i vilda västern."; } }
-        public string AfraidOfGunfire { get { if (afraidOfGunfire) return "Ja"; else return "Nej"; } }
+        public string Rideable { get { return rideable ? "Är inriden" : "Behöver ridas in"; } }
+        public string WildWestSuitable { get { return wildWestSuitable ? "en perfekt vilda västern-häst!" : "olämplig i vilda västern."; } }
+        public string AfraidOfGunfire { get { return afraidOfGunfire ? "Ja" : "Nej"; } }
         public string Speed 
         {
             get 
             {
-                switch (speed)
+                return speed switch
                 {
-                    case 0:
-                        return "Extremt långsam";
-                    case 1:
-                        return "Väldigt långsam";
-                    case 2:
-                        return "Långsam";
-                    case 3:
-                        return "Ganska långsam";
-                    case 4:
-                        return "Lagom";
-                    case 5:
-                        return "Ganska snabb";
-                    case 6:
-                        return "Snabb";
-                    case 7:
-                        return "Väldigt snabb";
-                    case 8:
-                        return "Extremt snabb";
-                    default:
-                        return "Lagom";
-                }
+                    0 => "Extremt långsam",
+                    1 => "Väldigt långsam",
+                    2 => "Långsam",
+                    3 => "Ganska långsam",
+                    4 => "Lagom",
+                    5 => "Ganska snabb",
+                    6 => "Snabb",
+                    7 => "Väldigt snabb",
+                    8 => "Extremt snabb",
+                    _ => "Lagom",
+                };
             }
         }
         public Horse() : base(20000, 4, MAX_AGE, "häst")
@@ -51,14 +41,12 @@ namespace InlämningsUppgiftAnimalShop
             speed = Convert.ToByte(randmomizer.Next(9));
             afraidOfGunfire = randmomizer.Next(2) == 0;
             rideable = randmomizer.Next(2) == 0;
-            if (rideable && !afraidOfGunfire && speed >= 5) wildWestSuitable = true; else wildWestSuitable = false;
+            wildWestSuitable = rideable && !afraidOfGunfire && speed >= 5;
             GetHorsePrize(rideable, afraidOfGunfire, speed);
         }
         public override string GetInfo()
         {
-            string studOrNot = "";
-            if (Gender == "Hona") studOrNot = "Sto"; else studOrNot = "Hingst";
-
+            string studOrNot = Gender == "Hona" ? "Sto" : "Hingst";
             return $"{Name}, {studOrNot}, {Age}\n" +
                 $"{Rideable}.\n" +
                 $"Färg: {Color} \n" +

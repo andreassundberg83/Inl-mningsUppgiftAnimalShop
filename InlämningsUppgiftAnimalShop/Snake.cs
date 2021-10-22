@@ -12,9 +12,9 @@ namespace InlämningsUppgiftAnimalShop
         private bool isVenomous;
         private byte length;
         private bool rattles;
-        public string IsVenomous { get { if (isVenomous) return "giftig "; else return ""; } }
+        public string IsVenomous { get { return isVenomous ? "giftig " : ""; } }
         public byte Length { get => length; set => length = value; }
-        public string Rattles { get { if (rattles) return "skaller"; else return ""; } }
+        public string Rattles { get { return rattles ? "skaller" : ""; } }
         public Snake() : base(6000, 8, MAX_AGE, "orm")
         {
             Random randomizer = new Random();

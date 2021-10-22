@@ -12,9 +12,9 @@ namespace InlämningsUppgiftAnimalShop
         private bool talks;
         private bool birdOfPrey;
         private bool migrates;
-        public string Talks { get { if (talks) return "talande "; else return "";  } }
-        public string BirdOfPrey { get { if (birdOfPrey) return "rovfågel"; else return "frö- och insektsätande fågel"; } }
-        public string Migrates { get { if (migrates) return "JA"; else return "NEJ"; } }
+        public string Talks { get { return talks ? "talande " : ""; } }
+        public string BirdOfPrey { get { return birdOfPrey ? "rovfågel" : "frö- och insektsätande fågel"; } }
+        public string Migrates { get { return migrates ? "Ja" : "Nej"; } }
         public Bird() : base(2000, 8, MAX_AGE, "fågel")
         {
             Random randomizer = new Random();

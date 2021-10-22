@@ -23,23 +23,14 @@ namespace InlämningsUppgiftAnimalShop
         public Animal SellAnimal(string AnimalType)
         {
             AnimalType = LookForAnimalInString(AnimalType);
-            switch (AnimalType)
+            return AnimalType switch
             {
-                case "hund":
-                    return new Dog();
-
-                case "fågel":
-                    return new Bird();
-
-                case "häst":
-                    return new Horse();
-
-                case "orm":
-                    return new Snake();
-
-                default:
-                    return null;
-            }
+                "hund" => new Dog(),
+                "fågel" => new Bird(),
+                "häst" => new Horse(),
+                "orm" => new Snake(),
+                _ => null,
+            };
         }
         /// <summary>
         /// Adds the sold animal to the shops List<> of sold animals.

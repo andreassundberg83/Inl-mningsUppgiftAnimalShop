@@ -29,32 +29,19 @@ namespace InlämningsUppgiftAnimalShop
         { 
             get 
             {
-                if (age < 12)
+                return age switch
                 {
-                    return $"{age} månader";
-                }
-                else if (age > 12 && age < 24)
-                {
-                    return $"{age / 12} år och {age - 12} månader";
-                }
-                else
-                {
-                    return $"{age / 12} år";  
-                }
+                    < 12 => $"{age} månader",
+                    > 12 and < 24 => $"{age / 12} år och {age - 12} månader",
+                    _ => $"{age / 12} år",
+                };
             } 
         }
         public string Gender 
         { 
             get 
             {
-                if (gender == true)
-                {
-                    return "Hona";
-                }
-                else
-                {
-                    return "Hane";
-                }
+                return gender == true ? "Hona" : "Hane";
             }
         }
         public string Color { get => color; set => color = value; }
@@ -68,7 +55,7 @@ namespace InlämningsUppgiftAnimalShop
             gender = randomizer.Next(2) == 0;
 
             //Gives discount for older animals
-            if (age >= maxAge*0.6 && age < maxAge*0.8)
+            if (age >= maxAge * 0.6 && age < maxAge * 0.8)
             {
                 this.Prize = Convert.ToInt32(prize * 0.6);
             }
@@ -81,14 +68,8 @@ namespace InlämningsUppgiftAnimalShop
                 this.Prize = prize;
             }
 
-            if (gender)
-            {
-                this.Name = femaleNames[randomizer.Next(13)];
-            }
-            else
-            {
-                this.Name = maleNames[randomizer.Next(13)];
-            }
+            this.Name = gender ? femaleNames[randomizer.Next(13)] : maleNames[randomizer.Next(13)];
+
             if (colorMaxValue != 0)
             {
                 this.Color = colors[randomizer.Next(colorMaxValue)];
@@ -103,6 +84,7 @@ namespace InlämningsUppgiftAnimalShop
         /// <returns></returns>
         public virtual string GetInfo() 
         {
+            //Virtual method created for testing during development.
             return "Hej";
         }
         

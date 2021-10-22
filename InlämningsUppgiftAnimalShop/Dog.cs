@@ -18,23 +18,18 @@ namespace InlämningsUppgiftAnimalShop
         { 
             get 
             {
-                switch (size)
+                return size switch
                 {
-                    case 0:
-                        return "Liten";
-                    case 1:
-                        return "Medium";
-                    case 2:
-                        return "Stor";
-                    default:
-                        return "";
-                        
-                }
+                    0 => "Liten",
+                    1 => "Medium",
+                    2 => "Stor",
+                    _ => "",
+                };
             } 
         }
         public string Race { get => race; set => race = value; }
-        public string WatchDog { get {if (watchDog) return "Vakthund"; else return "Ej vakthund";} }
-        public string Shepard { get {if (shepard) return "Vallhund"; else return "Ej vallhund";} }
+        public string WatchDog { get { return watchDog ? "Vakthund" : "Ej vakthund"; } }
+        public string Shepard { get { return shepard ? "Vallhund" : "Ej vallhund"; } }
         public Dog() : base(12000, 4, MAX_AGE, "hund")
         {
             Random randomizer = new Random();
