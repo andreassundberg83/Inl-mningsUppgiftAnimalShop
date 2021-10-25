@@ -8,22 +8,30 @@ namespace InlämningsUppgiftAnimalShop
 {
     class AnimalShop
     {
+        // Added listForShowingAvailabelAnimals at the end of development, just cause I thought it would make it easier to add another class. It  will
+        // automatically show in Program.AnimalsForSale(). Before I had them "hard-coded". That is also why the method AnimalsForSale() is in
+        // the program class.
+        public List<Animal> listForShowingAvailableAnimals = new List<Animal>();
         private List<Animal> soldAnimals = new List<Animal>();
         private int money;
         public int Money { get => money; set => money = value; }
         public AnimalShop()
         {
+            listForShowingAvailableAnimals.Add(SellAnimal("hund"));
+            listForShowingAvailableAnimals.Add(SellAnimal("häst"));
+            listForShowingAvailableAnimals.Add(SellAnimal("fågel"));
+            listForShowingAvailableAnimals.Add(SellAnimal("orm"));
 
         }
         /// <summary>
         /// Takes a string and returns an Animal.
         /// </summary>
-        /// <param name="AnimalType"></param>
+        /// <param name="animalType"></param>
         /// <returns></returns>
-        public Animal SellAnimal(string AnimalType)
+        public Animal SellAnimal(string animalType)
         {
-            AnimalType = LookForAnimalInString(AnimalType);
-            return AnimalType switch
+            animalType = LookForAnimalInString(animalType);
+            return animalType switch
             {
                 "hund" => new Dog(),
                 "fågel" => new Bird(),
@@ -56,15 +64,15 @@ namespace InlämningsUppgiftAnimalShop
             soldAnimalsString += $"\nAffärens intjänade pengar: {Money}";
             return soldAnimalsString;
         }
-        public string LookForAnimalInString(string AnimalType)
+        public string LookForAnimalInString(string animalType)
         {
             string[] availableAnimals = { "hund", "häst", "fågel", "orm" };
-            AnimalType = AnimalType.ToLower();
+            animalType = animalType.ToLower();
             foreach (string item in availableAnimals)
             {
-                if (AnimalType.Contains(item)) AnimalType = item;
+                if (animalType.Contains(item)) animalType = item;
             }
-            return AnimalType;
+            return animalType;
         }
     }
 }

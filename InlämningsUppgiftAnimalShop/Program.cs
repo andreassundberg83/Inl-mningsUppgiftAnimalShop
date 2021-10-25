@@ -8,9 +8,13 @@ namespace InlämningsUppgiftAnimalShop
         static void Main(string[] args)
         {
             UpdateScreen();
+            Console.WriteLine("INSTRUKTIONER: Svara på försäljarens frågor genom att skriva in ditt svar.\n" +
+                "Ryktet säger att försäljaren är i behov av snabba pengar. Prova att pruta vettja.");
+            Thread.Sleep(6000);
+            UpdateScreen();
             AnimalShop myShop = new AnimalShop();            
             SalesManSpeech($"Välkommen till min affär!");
-            Console.WriteLine($"{AnimalsForSale()}");
+            Console.WriteLine($"{AnimalsForSale(myShop)}");
             SalesManSpeech("Vill du köpa något av dessa djur?");
             Console.WriteLine("(Ja / Nej)\n");
             if (YesOrNo(Console.ReadLine()))
@@ -23,7 +27,7 @@ namespace InlämningsUppgiftAnimalShop
                 } while (YesOrNo(Console.ReadLine()));
                 UpdateScreen();
                 SalesManSpeech("Tack och välkommen åter!");
-                Thread.Sleep(1000);
+                Thread.Sleep(1000); 
                 UpdateScreen();                
                 Console.WriteLine(myShop.Summary());
             }
@@ -39,7 +43,7 @@ namespace InlämningsUppgiftAnimalShop
         /// <param name="myShop"></param>
         static void Shop(ref AnimalShop myShop)
         {
-            Console.WriteLine($"{AnimalsForSale()}");
+            Console.WriteLine($"{AnimalsForSale(myShop)}");
             SalesManSpeech("Vilken typ av djur vill du köpa?");
             string userInput = Console.ReadLine();
             Animal displayAnimal = myShop.SellAnimal(userInput);
@@ -47,7 +51,7 @@ namespace InlämningsUppgiftAnimalShop
             {
                 UpdateScreen();
                 SalesManSpeech($"Vi har tyvärr ingen {userInput}.");
-                Console.WriteLine(AnimalsForSale());
+                Console.WriteLine(AnimalsForSale(myShop));
                 SalesManSpeech("Vilken typ av djur vill du köpa?");
                 userInput = Console.ReadLine();
                 displayAnimal = myShop.SellAnimal(userInput);
@@ -95,9 +99,14 @@ namespace InlämningsUppgiftAnimalShop
             } while (!loopBreaker);
             
         }
-        static string AnimalsForSale()
+        static string AnimalsForSale(AnimalShop myShop)
         {
-            return "Dessa djur har vi till salu:\nHund\nHäst\nFågel\nOrm\n";
+            string availableAnimals = "";
+            foreach (Animal item in myShop.listForShowingAvailableAnimals)
+            {
+                availableAnimals += $"\n{item.AnimalType.ToUpper()}";
+            }
+            return $"Dessa djur har vi till salu:{availableAnimals}\n";
         }
         /// <summary>
         /// Tries to determine whether the user means yes or no. Returns yes if unsure.
