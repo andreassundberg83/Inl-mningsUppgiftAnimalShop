@@ -53,7 +53,7 @@ namespace InlämningsUppgiftAnimalShop
                 $"Skotträdd: {AfraidOfGunfire}\n" +
                 $"Snabbhet: {Speed}\n" +
                 $"{Gender.Substring(0,3)} är {WildWestSuitable}\n" +
-                $"Pris: {Prize} kr\n";
+                $"Pris: {string.Format("{0:C}", Prize)}\n";
         }
         /// <summary>
         /// Calculates the prize for a horse from the parameters.

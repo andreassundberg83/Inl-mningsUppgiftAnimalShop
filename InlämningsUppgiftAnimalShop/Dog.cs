@@ -73,7 +73,7 @@ namespace InlämningsUppgiftAnimalShop
             return $"{Name}, {Gender}, {Age}" +
                 $"\n{Color} {Size.ToLower()} {Race}.\n" +
                 $"Användningsområde: {areaOfUse}\n" +
-                $"Pris: {Prize} kr\n";
+                $"Pris: {string.Format("{0:C}", Prize)}\n";
                
         }
     }

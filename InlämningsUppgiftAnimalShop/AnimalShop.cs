@@ -61,7 +61,7 @@ namespace InlämningsUppgiftAnimalShop
                 soldAnimalsString += item.GetInfo() + "\n--------------------------------------------\n\n";
                 ;
             }
-            soldAnimalsString += $"\nAffärens intjänade pengar: {Money}";
+            soldAnimalsString += $"\nAffärens intjänade pengar: {string.Format("{0:C}", Money)}";
             return soldAnimalsString;
         }
         public string LookForAnimalInString(string animalType)

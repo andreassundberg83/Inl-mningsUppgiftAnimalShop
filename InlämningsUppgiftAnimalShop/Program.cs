@@ -64,7 +64,7 @@ namespace InlämningsUppgiftAnimalShop
                 Console.WriteLine($"*hämtar {displayAnimal.AnimalType}*\n");
                 SalesManSpeech($"Vi har följande {displayAnimal.AnimalType} till salu:");
                 Console.WriteLine($"{displayAnimal.GetInfo()}");
-                SalesManSpeech($"Vill du köpa {displayAnimal.Name} för {displayAnimal.Prize} kronor?");
+                SalesManSpeech($"Vill du köpa {displayAnimal.Name} för {string.Format("{0:C}", displayAnimal.Prize)}?");
                 _userInput = Console.ReadLine();
                 if (_userInput == "pruta")
                 {
@@ -73,7 +73,7 @@ namespace InlämningsUppgiftAnimalShop
                     discount /= 10;
                     displayAnimal.Prize = Convert.ToInt32(displayAnimal.Prize * discount);
                     Console.WriteLine("\n*föreståndaren kommer närmare och viskar*");
-                    SalesManSpeech($"Okej, vad sägs om att köpa {displayAnimal.Name} för {displayAnimal.Prize} kronor?");
+                    SalesManSpeech($"Okej, vad sägs om att köpa {displayAnimal.Name} för {string.Format("{0:C}", displayAnimal.Prize)}?");
                     _userInput = Console.ReadLine();
                 }
                 if (YesOrNo(_userInput))
@@ -130,6 +130,7 @@ namespace InlämningsUppgiftAnimalShop
         /// <param name="input"></param>
         static void SalesManSpeech(string input)
         {
+            Console.WriteLine("\a");
             foreach (char item in input)
             {
                 Console.Write(item);

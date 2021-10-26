@@ -11,8 +11,8 @@ namespace InlämningsUppgiftAnimalShop
         // If you dont want data to be accessed outside the class, you should make it private. 
         // You can make it available by using encapsulation.
 
-        // It is usefull to have multiple constructors when you want to be able to use different types or amounts of input parameters.
-        // For example you might want the constructor to be able to receive a value by a string or an integer or no value at all.
+        // It is useful to have multiple constructors when you want to be able to use different types or amounts of input parameters.
+        // For example, you might want the constructor to be able to receive a value by a string or an integer or no value at all.
 
         //I dont want these fields to be accessed outside the class, so they are private.
         private string[] maleNames = {"Charlie", "Ludde", "Sigge", "Bamse", "Bosse", "Rocky", "Max", "Tyson", "Jack", "Gizmo", "Loke", "Buster", "Zorro"};
